@@ -1,0 +1,67 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.maze-container {
+    display: inline-block;
+    border: 2px solid #333;
+    background-color: white;
+}
+
+.row {
+    display: flex;
+    height: 40px;
+}
+
+.non-visible {
+    height: 40px;
+    width: 40px;
+    background-color: black;
+}
+
+.air {
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border: 1px solid #eee;
+}
+
+.wall {
+    height: 40px;
+    width: 40px;
+    background-color: black;
+}
+
+.player {
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+    background-position: center;
+}
+
+.toggle-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.toggle-button:hover {
+    background: #45a049;
+}
