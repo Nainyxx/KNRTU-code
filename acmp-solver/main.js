@@ -2,7 +2,7 @@ const axios = require('axios');
 const puppeteer = require('puppeteer');
 const fs = require('fs').promises;
 
-// Конфигурация (вынесены чувствительные данные)
+// Config
 const CONFIG = {
     ACMP: {
         URL: 'https://acmp.ru/',
@@ -13,8 +13,8 @@ const CONFIG = {
     },
     OPENROUTER: {
         API_URL: 'https://openrouter.ai/api/v1/chat/completions',
-        API_KEY: process.env.OPENROUTER_API_KEY || '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',
-        MODEL: 'deepseek/deepseek-chat',
+        API_KEY: process.env.OPENROUTER_API_KEY || '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',
+        MODEL: 'deepseek/deepseek-chat-v3.1:free',
         MAX_TOKENS: 4000
     },
     TIMING: {
