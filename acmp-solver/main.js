@@ -90,7 +90,7 @@ async function askDeepSeek(question) {
             process.exit(1);
         } else if (error.response?.status === 429) {
             console.log('[WARN]    Rate limit exceeded, waiting...');
-            await sleep(10000);
+            await sleep(10000); 
             return null;
         } else if (error.code === 'ECONNABORTED') {
             console.error('[ERROR]  API timeout');
