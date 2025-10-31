@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateThemeIcon(theme) {
         themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
     }
+
+    
     
     themeToggle.addEventListener('click', function() {
         const currentTheme = body.getAttribute('data-theme');
@@ -114,3 +116,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+
