@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitica - Трекер привычек</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="dark">
+    <!-- Хедер -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span class="logo-text">Habitica</span>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn-theme" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i>
+                    <span>Войти</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <div class="app-container">
+        <!-- Боковая панель с профилем -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">👤</div>
+                    <div class="user-details">
+                        <h3 id="userName">Гость</h3>
+                        <p class="user-title" id="userTitle">Новичок</p>
+                    </div>
+                </div>
+                
+                <div class="level-section">
+                    <div class="level-info">
+                        <span class="level-label">Уровень</span>
+                        <span class="level-value" id="userLevel">1</span>
+                    </div>
+                    <div class="xp-container">
+                        <div class="xp-info">
+                            <span id="currentXP">0</span>/<span id="neededXP">100</span> XP
+                        </div>
+                        <div class="xp-bar">
+                            <div class="xp-progress" id="xpProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-mini">
+                    <div class="stat-mini">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-text">
+                            <div class="stat-value" id="streakDays">0</div>
+                            <div class="stat-label">дней</div>
+                        </div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-text">
+                            <div class="stat-value" id="totalHabits">0</div>
+                            <div class="stat-label">привычек</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <div class="habits-header">
+                <h2><i class="fas fa-tasks"></i> Мои привычки</h2>
+                <button class="btn-add-habit" id="addHabitBtn">
+                    <i class="fas fa-plus"></i> Новая привычка
+                </button>
+            </div>
+
+            <div class="habits-container">
+                <div class="habits-grid" id="habitsGrid">
+                    <!-- динамические привычки -->
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <h3>Начните отслеживать привычки</h3>
+                        <p>Добавьте свою первую привычку и начните свой путь к улучшению себя!</p>
+                        <button class="btn-primary" id="createFirstHabit">
+                            <i class="fas fa-plus"></i> Создать первую привычку
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="habits-summary">
+                <div class="summary-card">
+                    <h4><i class="fas fa-calendar-check"></i> Сегодня</h4>
+                    <div class="summary-content">
+                        <div class="summary-value" id="todayCompleted">0</div>
+                        <div class="summary-label">выполнено из <span id="todayTotal">0</span></div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <h4><i class="fas fa-trophy"></i> Лучшая серия</h4>
+                    <div class="summary-content">
+                        <div class="summary-value" id="bestStreak">0</div>
+                        <div class="summary-label">дней подряд</div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <h4><i class="fas fa-percentage"></i> Успешность</h4>
+                    <div class="summary-content">
+                        <div class="summary-value" id="successRate">0%</div>
+                        <div class="summary-label">за все время</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модальное окно авторизации -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close" id="closeAuthModal">&times;</span>
+            <div class="modal-header">
+                <h2>Добро пожаловать в Habitica</h2>
+                <p>Отслеживайте привычки, ставьте цели, становитесь лучше</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Вход</button>
+                <button class="tab-btn" data-tab="register">Регистрация</button>
+            </div>
+            
+            <div class="auth-forms">
+                <form id="loginForm" class="auth-form active">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Пароль" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                </form>
+                
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <input type="text" id="regName" placeholder="Имя" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="regEmail" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" id="regPassword" placeholder="Пароль" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно привычки -->
+    <div class="modal" id="habitModal">
+        <div class="modal-content">
+            <span class="close" id="closeHabitModal">&times;</span>
+            <div class="modal-header">
+                <h2>Новая привычка</h2>
+            </div>
+            
+            <form id="habitForm">
+                <div class="form-group">
+                    <input type="text" id="habitName" placeholder="Название привычки" required>
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="habitDescription" placeholder="Описание (необязательно)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Сложность:</label>
+                    <div class="difficulty-selector">
+                        <input type="radio" name="difficulty" id="easy" value="easy" checked>
+                        <label for="easy">Легко (+10 XP)</label>
+                        
+                        <input type="radio" name="difficulty" id="medium" value="medium">
+                        <label for="medium">Средне (+20 XP)</label>
+                        
+                        <input type="radio" name="difficulty" id="hard" value="hard">
+                        <label for="hard">Сложно (+30 XP)</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Цель:</label>
+                    <div class="goal-selector">
+                        <input type="radio" name="goal" id="daily" value="daily" checked>
+                        <label for="daily">Ежедневно</label>
+                        
+                        <input type="radio" name="goal" id="weekly" value="weekly">
+                        <label for="weekly">Еженедельно</label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Сохранить
+                    </button>
+                    <button type="button" class="btn-secondary" id="cancelHabit">
+                        Отмена
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notificationContainer"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+
+</body>
+</html>
