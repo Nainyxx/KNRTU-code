@@ -65,3 +65,11 @@ body {
 .toggle-button:hover {
     background: #45a049;
 }
+
+.platform {
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    background-color: black;
+}
